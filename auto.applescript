@@ -52,10 +52,12 @@ using terms from application "Messages"
 	
 	on message received theMessage from theBuddy for theChat
 		
-		-- display notification "notif"
-		send "++ testing iphone autoresponse" to theChat
-		
-	end message received
-	
-end using terms from
+		set autoreply_on to "0"
+		set x to do shell script "python /Users/maxfowler/Desktop/cs/autoresponder/auto.py " & id of theBuddy & " "
+		if (((x as string) is equal to "1") and ((autoreply_on as string) is equal to "1")) then
+			send "++ I'm currently off the grid. call me to reach me" to theChat
+		end if
 
+	end message received
+
+end using terms from
